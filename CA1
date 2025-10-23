@@ -1,5 +1,6 @@
-public class trial
+public class Gaming_Portal
 {}
+
 //**
 •	A prototype Online Gaming Portal application is required for demonstration. You are tasked with building this web application using Servlets, JDBC and MySQL.
 •	When a player registers for the Online Gaming Portal (with their chosen gamer tag and password), they are automatically given 500 game credits.
