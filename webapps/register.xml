@@ -7,7 +7,7 @@
 
     <h2>Registration</h2>
 
-    <form action="RegisterServlet" method="post">
+    <form action="Register" method="post">
 
         <h3>Please enter your details to register:</h3>
 
