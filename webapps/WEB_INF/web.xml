@@ -27,6 +27,8 @@
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
 
+
+// to do 
     <!-- Guess Number Servlet Definition -->
     <servlet>
         <servlet-name>GuessNumber</servlet-name>
