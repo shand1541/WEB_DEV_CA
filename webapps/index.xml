@@ -1,1 +1,23 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game registration</title>
+</head>
+<body>
+    <div>
+        <h1>Welcome! </h1>
+        <p>Before you can play, you need to login or register.</p>
+        // need to change to add details and register
+         <form action="ageCheck" method="post">
+            <label for="age">please enter your details </label><br>
+            <input type="number" id="age" name="age" min="1" max="150" required>
+            <br>
+            <input type="submit" value="Continue">
+        </form>
+        
+        <p><small>Invalid details.</small></p>
+    </div>
+</body>
+</html>

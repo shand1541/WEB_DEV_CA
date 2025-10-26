@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gaming page </title>
+</head>
+<body>
+    <div>
+        <h1>title</h1>
+        
+        <div>
+            <h3>How to Play:</h3>
+            <p>I'm thinking of a number between 1 and 100. Can you guess what it is?</p>
+            <p>Enter your guess below and see if you can find the lucky number!</p>
+        </div>
+        
+        <form action="guessNumber" method="post">
+            <label for="guess">Enter your guess (1-100):</label><br>
+            <input type="number" id="guess" name="guess" min="1" max="100" required>
+            <br>
+            <input type="submit" value="Make Guess">
+        </form>
+        
+        <div>
+            <p><a href="index.html">Back to Age Verification</a></p>
+        </div>
+    </div>
+</body>
+</html>
