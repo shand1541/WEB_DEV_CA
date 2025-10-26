@@ -9,24 +9,22 @@
     <description>
         A web application for user registration and game access
     </description>
-    <!-- need to change servelts to match gaming and registeration -->
+
 
     <!-- Welcome file list -->
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 
-    <!-- Age Check Servlet Definition -->
+    <!-- registration -->
     <servlet>
-        <servlet-name>AgeCheckServlet</servlet-name>
-        <servlet-class>AgeCheckServlet</servlet-class>
-        <description>Servlet to verify user age before allowing game access</description>
+        <servlet-name>RegisterPage</servlet-name> <!--a reference for mapping -->
+        <servlet-class>RegisterPage</servlet-class><!--b match java class name -->
+        <description>Servlet to handle user registration</description>
     </servlet>
-
-    <!-- Age Check Servlet Mapping -->
     <servlet-mapping>
-        <servlet-name>AgeCheckServlet</servlet-name>
-        <url-pattern>/ageCheck</url-pattern>
+        <servlet-name>RegisterPage</servlet-name><!--A -->
+        <url-pattern>/register</url-pattern>
     </servlet-mapping>
 
     <!-- Guess Number Servlet Definition -->
