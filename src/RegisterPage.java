@@ -46,15 +46,13 @@ public class RegisterPage extends HttpServlet{
             ps.setInt(3, 500);//set credits to 500
             int result = ps.executeUpdate();
 
+            out.println("<html><body>");
             if (result > 0) {
                 out.println("<html><body>");
                 out.println("<p>Welcome " + gamerTag + "! You have been awarded 500 game credits.</p>");
                 out.println("<a href='login.html'>Login Now</a>");
-                out.println("</body></html>");
             } else {
-                out.println("<html><body>");
                 out.println("<h3>Registration failed. Please try again.</h3>");
-                out.println("</body></html>");
             }
                 ps.close();
                 conn.close();
