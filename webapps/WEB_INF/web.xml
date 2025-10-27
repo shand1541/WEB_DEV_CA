@@ -27,19 +27,26 @@
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
 
-
-// to do 
-    <!-- Guess Number Servlet Definition -->
+    <!-- login  -->
     <servlet>
-        <servlet-name>GuessNumber</servlet-name>
-        <servlet-class>GuessNumber</servlet-class>
-        <description>Servlet to handle number guessing game logic</description>
+        <servlet-name>LoginPage</servlet-name> <!--a reference for mapping -->
+        <servlet-class>LoginPage</servlet-class><!--b match java class name -->
+        <description>Servlet to handle user login</description>
     </servlet>
-
-    <!-- Guess Number Servlet Mapping -->
     <servlet-mapping>
-        <servlet-name>GuessNumber</servlet-name>
-        <url-pattern>/guessNumber</url-pattern>
+        <servlet-name>LoginPage</servlet-name><!--A -->
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <!-- credit -->
+    <servlet>
+        <servlet-name>CreditPage</servlet-name> <!--a reference for mapping -->
+        <servlet-class>CreditPage</servlet-class>
+        <description>Servlet to handle user credit </description>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreditPage</servlet-name> <!--A -->
+        <url-pattern>/credit</url-pattern>
     </servlet-mapping>
 
     <!-- Session configuration -->
