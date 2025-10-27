@@ -48,12 +48,14 @@ public class RegisterPage extends HttpServlet{
 
             out.println("<html><body>");
             if (result > 0) {
-                out.println("<html><body>");
+
+                out.println("<h3>Registration successful!</h3>");
                 out.println("<p>Welcome " + gamerTag + "! You have been awarded 500 game credits.</p>");
                 out.println("<a href='login.html'>Login Now</a>");
             } else {
                 out.println("<h3>Registration failed. Please try again.</h3>");
             }
+            out.println("</body></html>");
                 ps.close();
                 conn.close();
             
@@ -61,6 +63,9 @@ public class RegisterPage extends HttpServlet{
             e.printStackTrace();
             out.println("<html><body>");
             out.println("<h3>Error occurred while registering. Please try again later.</h3>");
+
+
+            out.println("<a href='register.html'>Go Back</a>");//go back to registration page
             out.println("</body></html>");
         }
     }
