@@ -48,7 +48,7 @@ public class RegisterPage extends HttpServlet{
 
             out.println("<html><body>");
             if (result > 0) {
-
+          
                 out.println("<h3>Registration successful!</h3>");
                 out.println("<p>Welcome " + gamerTag + "! You have been awarded 500 game credits.</p>");
                 out.println("<a href='login.html'>Login Now</a>");
