@@ -28,7 +28,7 @@ public class LoginPage extends HttpServlet {
                 int credits = rs.getInt("credits");
                 out.println("<h3>Welcome " + gamerTag + "!</h3>");
                 out.println("<p>Your current game credits: " + credits + "</p>");
-                out.println("<form action='credit' method='post'>");
+                out.println("<form action='credits' method='post'>");
                 out.println("Add/Spend Credits: <input type='number' name='change' />");// changes number of credits 
                 out.println("<input type='hidden' name='gamerTag' value='" + gamerTag + "' />");
                 out.println("<input type='submit' value='Update Credits' />");

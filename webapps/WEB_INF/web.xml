@@ -46,7 +46,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>CreditPage</servlet-name> <!--A -->
-        <url-pattern>/credit</url-pattern>
+        <url-pattern>/credits</url-pattern>
     </servlet-mapping>
 
     <!-- Session configuration -->
