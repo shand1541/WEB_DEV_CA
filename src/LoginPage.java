@@ -29,7 +29,7 @@ public class LoginPage extends HttpServlet {
                 out.println("<h3>Welcome " + gamerTag + "!</h3>");
                 out.println("<p>Your current game credits: " + credits + "</p>");
                 out.println("<form action='credits' method='post'>");
-                out.println("Add/Spend Credits: <input type='number' name='change' />");
+                out.println("Add/Spend Credits: <input type='number' name='change' />");// changes number of credits 
                 out.println("<input type='hidden' name='gamerTag' value='" + gamerTag + "' />");
                 out.println("<input type='submit' value='Update Credits' />");
                 out.println("</form>");
