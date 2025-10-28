@@ -44,8 +44,12 @@ public class LoginPage extends HttpServlet {
             ps.close();
             conn.close();
         } catch (SQLException e) {
-            e.printStackTrace();
-            out.println("<html><body>");
-        }
+                e.printStackTrace();
+                out.println("<html><body>");
+                out.println("<h3>Error occurred. Please try again later.</h3>");
+                out.println("<a href='login.html'>Go Back</a>");
+                out.println("</body></html>");
+}
+
     }
 }   

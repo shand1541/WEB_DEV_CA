@@ -40,7 +40,8 @@ public class RegisterPage extends HttpServlet{
         try {
             // Database connection
             Connection conn = DBConnection.getConnection();
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO users (gamerTag, password, credits) VALUES (?, ?, ?)");
+            PreparedStatement ps = conn.prepareStatement(
+                "INSERT INTO users (gamerTag, password, credits) VALUES (?, ?, ?)");
             ps.setString(1, gamerTag);
             ps.setString(2, password);
             ps.setInt(3, 500);//set credits to 500
