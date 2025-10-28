@@ -14,7 +14,7 @@ public class CreditPage extends HttpServlet{
         String gamerTag = request.getParameter("gamerTag");
         int change = Integer.parseInt(request.getParameter("change")); //changes the number of credits from login 
             //changes string to int to get credit number (incase of a - number)
-        try {
+        try { 
             Connection conn = DBConnection.getConnection();
 
             // Get current credits
