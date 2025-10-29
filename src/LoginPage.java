@@ -5,17 +5,6 @@ import java.sql.*;
 
 public class LoginPage extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
-    throws ServletException, IOException {
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h3>Login servlet is working!</h3>");
-        out.println("<p>Please use the login form to log in.</p>");
-        out.println("<a href='login.html'>Go to Login Form</a>");
-        out.println("</body></html>");
-    }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
         throws ServletException, IOException {
 

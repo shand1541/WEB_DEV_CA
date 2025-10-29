@@ -10,7 +10,6 @@
         A web application for user registration and game access
     </description>
 
-
     <!-- Welcome file list -->
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
@@ -18,34 +17,34 @@
 
     <!-- registration -->
     <servlet>
-        <servlet-name>RegisterPage</servlet-name> <!--a reference for mapping -->
-        <servlet-class>RegisterPage</servlet-class><!--b match java class name -->
+        <servlet-name>RegisterPage</servlet-name>
+        <servlet-class>RegisterPage</servlet-class>
         <description>Servlet to handle user registration</description>
     </servlet>
     <servlet-mapping>
-        <servlet-name>RegisterPage</servlet-name><!--A -->
+        <servlet-name>RegisterPage</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
 
     <!-- login  -->
     <servlet>
-        <servlet-name>LoginPage</servlet-name> <!--a reference for mapping -->
-        <servlet-class>LoginPage</servlet-class><!--b match java class name -->
+        <servlet-name>LoginPage</servlet-name>
+        <servlet-class>LoginPage</servlet-class>
         <description>Servlet to handle user login</description>
     </servlet>
     <servlet-mapping>
-        <servlet-name>LoginPage</servlet-name><!--A -->
+        <servlet-name>LoginPage</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
     <!-- credit -->
     <servlet>
-        <servlet-name>CreditPage</servlet-name> <!--a reference for mapping -->
+        <servlet-name>CreditPage</servlet-name>
         <servlet-class>CreditPage</servlet-class>
-        <description>Servlet to handle user credit </description>
+        <description>Servlet to handle user credit</description>
     </servlet>
     <servlet-mapping>
-        <servlet-name>CreditPage</servlet-name> <!--A -->
+        <servlet-name>CreditPage</servlet-name>
         <url-pattern>/credits</url-pattern>
     </servlet-mapping>
 

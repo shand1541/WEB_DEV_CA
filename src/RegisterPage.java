@@ -5,17 +5,6 @@ import java.sql.*;
 
 public class RegisterPage extends HttpServlet{
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
-    throws ServletException, IOException {
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h3>Register servlet is working!</h3>");
-        out.println("<p>Please use the registration form to register.</p>");
-        out.println("<a href='register.html'>Go to Registration Form</a>");
-        out.println("</body></html>");
-    }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
     throws ServletException, IOException {
 
