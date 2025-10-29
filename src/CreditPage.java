@@ -54,6 +54,11 @@ public class CreditPage extends HttpServlet{
             
         } catch (SQLException e) {
             e.printStackTrace();
+            out.println("<html><body>");
+            out.println("<h3>Database error occurred. Please try again later.</h3>");
+            out.println("<p>Error: " + e.getMessage() + "</p>");
+            out.println("<a href='login.html'>Back to Login</a>");
+            out.println("</body></html>");
         }
      }
 }
