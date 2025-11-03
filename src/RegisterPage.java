@@ -5,7 +5,7 @@ import java.sql.*;
 
 public class RegisterPage extends HttpServlet{
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) //do post submits data to server
     throws ServletException, IOException {
 
         response.setContentType("text/html");
@@ -37,12 +37,13 @@ public class RegisterPage extends HttpServlet{
         }
 
         //insert into database 
-        try {
+        try (
             // Database connection
             Connection conn = DBConnection.getConnection();
             PreparedStatement ps = conn.prepareStatement(
                 "INSERT INTO users (gamerTag, password, credits) VALUES (?, ?, ?)");
-            ps.setString(1, gamerTag);
+        ) {
+             ps.setString(1, gamerTag);
             ps.setString(2, password);
             ps.setInt(3, 500);//set credits to 500
             int result = ps.executeUpdate();
@@ -57,8 +58,6 @@ public class RegisterPage extends HttpServlet{
                 out.println("<h3>Registration failed. Please try again.</h3>");
             }
             out.println("</body></html>");
-                ps.close();
-                conn.close();
             
         } catch (SQLException e) {
             e.printStackTrace();
