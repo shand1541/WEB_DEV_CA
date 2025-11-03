@@ -3,62 +3,72 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.sql.*;
 
-public class CreditPage extends HttpServlet{
-    
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
-        throws ServletException, IOException {
+public class CreditPage extends HttpServlet {
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        //gets gamerTag and changes credits 
+
         String gamerTag = request.getParameter("gamerTag");
-        int change = Integer.parseInt(request.getParameter("change")); //changes the number of credits from login 
-            //changes string to int to get credit number (incase of a - number)
-        try { 
-            Connection conn = DBConnection.getConnection();
+        int change;
 
-            // Get current credits
-            PreparedStatement ps = conn.prepareStatement(
-                "SELECT credits FROM users WHERE gamerTag=?");
-            ps.setString(1, gamerTag);
-            ResultSet rs = ps.executeQuery();
-
+        // Validate credit change input
+        try {
+            change = Integer.parseInt(request.getParameter("change"));
+        } catch (NumberFormatException e) {
             out.println("<html><body>");
-            if (rs.next()) { //check if user exists 
-                int current = rs.getInt("credits");
-                int newCredits = current + change;//update the balance 
-            //make sure credits isnt 0
-                if (newCredits < 0) {
-                    out.println("<h3>Insufficient credits! Current balance: " + current + "</h3>");
-                } else {
-                    //updates new balance 
-                    PreparedStatement update = conn.prepareStatement(
-                        "UPDATE users SET credits=? WHERE gamerTag=?");
-                    update.setInt(1, newCredits);
-                    update.setString(2, gamerTag);
-                    update.executeUpdate();
-                    update.close();
-                    //display message 
-                    out.println("<h3>Credits updated!</h3>");
-                    out.println("<p>" + gamerTag + ", your new balance: " + newCredits + "</p>");
-                }
-            } else {//no user found
-                out.println("<h3>User not found.</h3>");
-            }//back to login 
-            out.println("<a href='login.html'>Back</a>");
+            out.println("<h3>Invalid credit change amount. Please enter a valid number.</h3>");
+            out.println("<a href='" + request.getContextPath() + "/login.html'>Back</a>");
             out.println("</body></html>");
-            //close all 
-            rs.close();
-            ps.close();
-            conn.close();
-            
+            return;
+        }
+
+        // Try-with-resources for DB connection and statements
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(
+                     "SELECT credits FROM users WHERE gamerTag=?")) {
+
+            ps.setString(1, gamerTag);
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                out.println("<html><body>");
+
+                if (rs.next()) {
+                    int current = rs.getInt("credits");
+                    int newCredits = current + change;
+
+                    if (newCredits < 0) {
+                        out.println("<h3>Insufficient credits! Current balance: " + current + "</h3>");
+                    } else {
+                        // Update credits
+                        try (PreparedStatement update = conn.prepareStatement(
+                                "UPDATE users SET credits=? WHERE gamerTag=?")) {
+                            update.setInt(1, newCredits);
+                            update.setString(2, gamerTag);
+                            update.executeUpdate();
+                        }
+
+                        out.println("<h3>Credits updated!</h3>");
+                        out.println("<p>" + gamerTag + ", your new balance: " + newCredits + "</p>");
+                    }
+                } else {
+                    out.println("<h3>User not found.</h3>");
+                }
+
+                out.println("<a href='" + request.getContextPath() + "/login.html'>Back</a>");
+                out.println("</body></html>");
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
             out.println("<html><body>");
             out.println("<h3>Database error occurred. Please try again later.</h3>");
             out.println("<p>Error: " + e.getMessage() + "</p>");
-            out.println("<a href='login.html'>Back to Login</a>");
+            out.println("<a href='" + request.getContextPath() + "/login.html'>Back to Login</a>");
             out.println("</body></html>");
         }
-     }
+    }
 }
