@@ -17,7 +17,7 @@ public class CreditPage extends HttpServlet {
         // Validate credit change input
         try {
             change = Integer.parseInt(request.getParameter("change"));
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException e) { //makes sure its valid numbers 
             out.println("<html><body>");
             out.println("<h3>Invalid credit change amount. Please enter a valid number.</h3>");
             out.println("<a href='" + request.getContextPath() + "/login.html'>Back</a>");
