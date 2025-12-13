@@ -28,8 +28,8 @@ CREATE TABLE products (
     highest_bid DECIMAL(10,2) DEFAULT 0.00,
     owner_id INT NOT NULL,
     listing_status ENUM('available', 'completed', 'cancelled') DEFAULT 'available', -- set available when listed 
-    listing_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,//time listed 
-    auction_end TIMESTAMP,//auction time ended
+    listing_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,--time listed 
+    auction_end TIMESTAMP,-- auction time ended
     image_path VARCHAR(255),
     FOREIGN KEY (owner_id) REFERENCES members(member_id) --FK to link to members table 
 );
@@ -63,3 +63,4 @@ INSERT INTO bidding_history (product_id, member_id, bid_value, bid_status) VALUE
 (2, 3, 580.00, 'winning'),
 (3, 1, 30.00, 'outbid'),
 (3, 2, 35.00, 'winning');
+ 
