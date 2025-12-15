@@ -1,6 +1,7 @@
 
 import com.opensymphony.xwork2.ActionSupport;
 
+@SuppressWarnings({"all", "unchecked", "rawtypes", "serial"})
 public class RegisterAction extends ActionSupport {
     private static final long serialVersionUID = 1L;
     
@@ -13,6 +14,7 @@ public class RegisterAction extends ActionSupport {
     
     private MemberDAO memberDAO = new MemberDAO();
     
+    @SuppressWarnings("all")
     public String execute() {
         // Check if required fields are filled
         if (username == null || email == null || password == null || 

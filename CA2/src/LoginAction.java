@@ -3,6 +3,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.interceptor.SessionAware;
 
 // Login action for CA2
+@SuppressWarnings({"all", "unchecked", "rawtypes", "serial"})
 public class LoginAction extends ActionSupport implements SessionAware {
     private static final long serialVersionUID = 1L;
     
@@ -11,6 +12,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
     private MemberDAO memberDAO = new MemberDAO();
     private Map session;
     
+    @SuppressWarnings("all")
     public String execute() {
         // Check if fields are filled in
         if (username == null || password == null || 
@@ -42,5 +44,6 @@ public class LoginAction extends ActionSupport implements SessionAware {
     public void setPassword(String password) { this.password = password; }
     
     @Override
+    @SuppressWarnings("all")
     public void setSession(Map session) { this.session = session; }
 }
