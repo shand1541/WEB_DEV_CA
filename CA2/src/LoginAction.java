@@ -1,9 +1,7 @@
 import java.util.Map;
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.struts2.interceptor.SessionAware; 
+import org.apache.struts2.interceptor.SessionAware;
 
-// Login action for CA2
-@SuppressWarnings({"all", "unchecked", "rawtypes", "serial"})
 public class LoginAction extends ActionSupport implements SessionAware {
     private static final long serialVersionUID = 1L;
     
@@ -12,13 +10,10 @@ public class LoginAction extends ActionSupport implements SessionAware {
     private MemberDAO memberDAO = new MemberDAO();
     private Map session;
     
-    @SuppressWarnings("all")
     public String execute() {
-        // Check if fields are filled in
-        if (username == null || password == null || 
-            username.trim().isEmpty() || password.trim().isEmpty()) {
-            addActionError("Username and password are required.");
-            return INPUT; // go back to login with error
+        // Check if fields are filled in - first time loading login.jsp
+        if (username == null || password == null) {
+            return INPUT; // go back to login form
         }
         
         try {
@@ -27,16 +22,13 @@ public class LoginAction extends ActionSupport implements SessionAware {
             if (member != null) {
                 // Login successful 
                 session.put("user", member);
-                addActionMessage("Login successful! Welcome " + member.getDisplayName());
                 return SUCCESS; // go to dashboard
             } else {
                 // Login failed
-                addActionError("Invalid username or password. Please try again.");
-                return ERROR; //  error message
+                return ERROR; // show error message
             }
         } catch (Exception e) {
-            addActionError("An error occurred during login: " + e.getMessage());
-            e.printStackTrace(); // for debugging
+            e.printStackTrace();
             return ERROR;
         }
     }
@@ -48,7 +40,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
     
-    @Override
-    @SuppressWarnings("all")
-    public void setSession(Map session) { this.session = session; }
+    public void setSession(Map session) { 
+        this.session = session; 
+    }
 }
