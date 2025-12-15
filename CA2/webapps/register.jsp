@@ -17,6 +17,6 @@
         <s:textfield name="address" label="Address" />
         <s:submit value="Register" />
     </s:form>
-    <p><a href="/CA2/login.action">Already have an account? Login here</a></p>
+    <p><a href="login.action">Already have an account? Login here</a></p>
 </body>
 </html>
