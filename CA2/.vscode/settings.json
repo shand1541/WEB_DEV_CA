@@ -1,8 +1,14 @@
 {
     "java.project.referencedLibraries": [
-        "webapps/WEB_INF/lib/*.jar",
-        "lib/*.jar"
+        "webapps/WEB_INF/lib/**/*.jar",
+        "lib/**/*.jar"
     ],
-    "java.compile.nullAnalysis.mode": "disabled",
-    "java.configuration.updateBuildConfiguration": "automatic"
+    "java.compile.nullAnalysis.mode": "disabled", 
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.import.gradle.enabled": false,
+    "java.import.maven.enabled": false,
+    "java.import.eclipse.enabled": true,
+    "java.clean.workspace": true,
+    "java.sources.organizeImports.starThreshold": 99,
+    "java.sources.organizeImports.staticStarThreshold": 99
 }

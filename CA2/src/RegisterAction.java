@@ -1,8 +1,5 @@
 
-import com.opensymphony.xwork2.ActionSupport;
-
-public class RegisterAction extends ActionSupport {
-    private static final long serialVersionUID = 1L;
+public class RegisterAction {
     
     private String username;
     private String email;
@@ -17,14 +14,12 @@ public class RegisterAction extends ActionSupport {
         // Check if required fields are filled
         if (username == null || email == null || password == null || 
             username.trim().isEmpty() || email.trim().isEmpty() || password.trim().isEmpty()) {
-            addActionError("Username, email, and password are required.");
             return "input"; // go back to form
         }
         
         try {
             // Check if username already taken
             if (memberDAO.usernameExists(username.trim())) {
-                addActionError("Username already exists. Please choose another.");
                 return "error"; // show error
             }
             
@@ -38,14 +33,11 @@ public class RegisterAction extends ActionSupport {
             member.setPostalAddress(address != null ? address.trim() : null);
             
             if (memberDAO.registerMember(member)) {
-                addActionMessage("Registration successful! Please login.");
                 return "success";
             } else {
-                addActionError("Registration failed. Please try again.");
                 return "error";
             }
         } catch (Exception e) {
-            addActionError("System error during registration. Please try again.");
             return "error";
         }
     }

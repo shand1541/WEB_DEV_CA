@@ -1,23 +1,16 @@
-import java.util.Map;
-import com.opensymphony.xwork2.ActionSupport;
-import org.apache.struts2.interceptor.SessionAware;
-
 // Login action for CA2
-
-public class LoginAction extends ActionSupport implements SessionAware {
-   
+public class LoginAction {
     
     private String username;
     private String password;
     private MemberDAO memberDAO = new MemberDAO();
-    private Map session;
+    private java.util.Map<String, Object> session = new java.util.HashMap<>();
     
     public String execute() {
         // Check if fields are filled in
         if (username == null || password == null || 
             username.trim().isEmpty() || password.trim().isEmpty()) {
-            addActionError("Username and password are required.");
-            return "input"; // go back to login 
+            return "input"; // go back to login
         }
         
         try {
@@ -29,11 +22,9 @@ public class LoginAction extends ActionSupport implements SessionAware {
                 return "success"; // go to dashboard
             } else {
                 // Login failed
-                addActionError("Invalid username or password.");
                 return "error"; //  error message
             }
         } catch (Exception e) {
-            addActionError("Login system error. Please try again.");
             return "error";
         }
     }
@@ -45,6 +36,6 @@ public class LoginAction extends ActionSupport implements SessionAware {
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
     
-    @Override
-    public void setSession(Map session) { this.session = session; }
+    public void setSession(java.util.Map<String, Object> session) { this.session = session; }
+    public java.util.Map<String, Object> getSession() { return session; }
 }
