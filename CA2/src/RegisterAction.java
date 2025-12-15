@@ -1,5 +1,7 @@
 
-public class RegisterAction {
+import com.opensymphony.xwork2.ActionSupport;
+
+public class RegisterAction extends ActionSupport {
     
     private String username;
     private String email;
