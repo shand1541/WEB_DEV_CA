@@ -9,8 +9,9 @@
     <description>
         CA2 web application
     </description>
-//filler 
-        <filter>
+
+    <!-- Struts 2 Filter -->
+    <filter>
         <filter-name>struts2</filter-name>
         <filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
     </filter>
