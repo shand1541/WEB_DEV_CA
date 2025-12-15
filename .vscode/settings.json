@@ -2,6 +2,6 @@
     "java.project.sourcePaths": ["CA2/src"],
     "java.project.outputPath": "CA2/bin",
     "java.project.referencedLibraries": [
-        "CA2/lib/**/*.jar"
+        "CA2/webapps/WEB-INF/lib/**/*.jar"
     ]
 }

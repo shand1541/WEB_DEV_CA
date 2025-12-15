@@ -7,10 +7,12 @@
     <title>Login - CA2 E-commerce</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 50px; }
-        .error { color: red; margin: 10px 0; }
         .form-container { max-width: 400px; }
-        input[type="text"], input[type="password"] { width: 100%; padding: 8px; margin: 5px 0; }
-        input[type="submit"] { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+        form { max-width: 400px; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input[type="text"], input[type="password"] { width: 100%; padding: 8px; margin: 5px 0; box-sizing: border-box; }
+        input[type="submit"] { background-color: #007cba; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+        input[type="submit"]:hover { background-color: #005a8b; }
     </style>
 </head>
 <body>
@@ -31,10 +33,10 @@
             </div>
         </s:if>
         
-        <s:form action="LoginServlet" method="post">
+        <s:form action="login" method="post">
             <s:textfield name="username" label="Username" required="true"/>
             <s:password name="password" label="Password" required="true"/>
-            <s:submit value="Login" />
+            <s:submit value="Login"/>
         </s:form>
         
         <p><a href="register.jsp">Don't have an account? Register here</a></p>

@@ -29,25 +29,31 @@ public class MemberDAO {
     
     // Check login 
     public Member loginMember(String username, String password) {
-        String sql = "SELECT * FROM members WHERE login_name = ? AND password_hash = ? AND account_status = 'active'";
+        // Simple login - get user and check password flexibly
+        String sql = "SELECT * FROM members WHERE login_name = ?";
         
         try (Connection conn = DatabaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             
             stmt.setString(1, username);
-            stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
             
             if (rs.next()) {
-                Member member = new Member();
-                member.setMemberId(rs.getInt("member_id"));
-                member.setLoginName(rs.getString("login_name"));
-                member.setEmailAddress(rs.getString("email_address"));
-                member.setDisplayName(rs.getString("display_name"));
-                member.setContactNumber(rs.getString("contact_number"));
-                member.setPostalAddress(rs.getString("postal_address"));
-                member.setRegistrationDate(rs.getTimestamp("registration_date"));
-                return member;
+                String storedPassword = rs.getString("password_hash");
+                String accountStatus = rs.getString("account_status");
+                
+                // Check if password matches and account is active
+                if (password.equals(storedPassword) && "active".equals(accountStatus)) {
+                    Member member = new Member();
+                    member.setMemberId(rs.getInt("member_id"));
+                    member.setLoginName(rs.getString("login_name"));
+                    member.setEmailAddress(rs.getString("email_address"));
+                    member.setDisplayName(rs.getString("display_name"));
+                    member.setContactNumber(rs.getString("contact_number"));
+                    member.setPostalAddress(rs.getString("postal_address"));
+                    member.setRegistrationDate(rs.getTimestamp("registration_date"));
+                    return member;
+                }
             }
             
         } catch (SQLException e) {
@@ -131,5 +137,26 @@ public class MemberDAO {
             System.err.println("Error getting member by ID: " + e.getMessage());
         }
         return null;
+    }
+    
+    // Update member information
+    public boolean updateMember(Member member) {
+        String sql = "UPDATE members SET email_address = ?, display_name = ?, contact_number = ?, postal_address = ? WHERE member_id = ?";
+        
+        try (Connection conn = DatabaseManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, member.getEmailAddress());
+            stmt.setString(2, member.getDisplayName());
+            stmt.setString(3, member.getContactNumber());
+            stmt.setString(4, member.getPostalAddress());
+            stmt.setInt(5, member.getMemberId());
+            
+            return stmt.executeUpdate() > 0;
+            
+        } catch (SQLException e) {
+            System.err.println("Error updating member: " + e.getMessage());
+            return false;
+        }
     }
 }

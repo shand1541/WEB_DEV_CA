@@ -21,12 +21,12 @@
         <% } %>
         
         <div class="nav-links">
-            <a href="profile">My Profile</a>
-            <a href="viewUsers">View All Users</a>
-            <a href="viewItems">View Items</a>
-            <a href="addItemForm">Add Item</a>
-            <a href="myBids">My Bids</a>
-            <a href="logout">Logout</a>
+            <a href="profile.action">My Profile</a>
+            <a href="viewUsers.action">View All Users</a>
+            <a href="viewItems.action">View Items</a>
+            <a href="addItemForm.action">Add Item</a>
+            <a href="myBids.action">My Bids</a>
+            <a href="logout.action">Logout</a>
         </div>
     </div>
     

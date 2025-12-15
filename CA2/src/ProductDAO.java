@@ -30,7 +30,7 @@ public class ProductDAO {
     // Get all items for sale
     public List<Product> getAllProducts() {
         List<Product> products = new ArrayList<>();
-        String sql = "SELECT * FROM products WHERE listing_status = 'active' ORDER BY listing_date DESC";
+        String sql = "SELECT * FROM products WHERE listing_status = 'available' ORDER BY listing_date DESC";
         
         try (Connection conn = DatabaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -55,4 +55,36 @@ public class ProductDAO {
         }
         return products;
     }
-} 
+    
+    // Get product by ID
+    public Product getProductById(int productId) {
+        String sql = "SELECT * FROM products WHERE product_id = ?";
+        
+        try (Connection conn = DatabaseManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, productId);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                Product product = new Product();
+                product.setProductId(rs.getInt("product_id"));
+                product.setProductName(rs.getString("product_name"));
+                product.setProductDetails(rs.getString("product_details"));
+                product.setProductCategory(rs.getString("product_category"));
+                product.setMinimumBid(rs.getBigDecimal("minimum_bid"));
+                product.setHighestBid(rs.getBigDecimal("highest_bid"));
+                product.setOwnerId(rs.getInt("owner_id"));
+                product.setListingStatus(rs.getString("listing_status"));
+                product.setListingDate(rs.getTimestamp("listing_date"));
+                rs.close();
+                return product;
+            }
+            rs.close();
+            
+        } catch (SQLException e) {
+            System.err.println("Error getting product by ID: " + e.getMessage());
+        }
+        return null;
+    }
+}

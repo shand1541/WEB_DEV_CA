@@ -3,7 +3,7 @@ import java.sql.*;
 // database connection class 
 public class DatabaseManager {
     
-    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/ecommerce_ca2";
+    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/ecommerce_ca2?useSSL=false&allowPublicKeyRetrieval=true";
     private static final String DB_USER = "root";
     private static final String DB_PASS = "root";
     

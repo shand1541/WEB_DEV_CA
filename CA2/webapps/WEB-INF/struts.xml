@@ -4,65 +4,121 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
+    <!-- Global constants -->
     <constant name="struts.enable.DynamicMethodInvocation" value="false" />
     <constant name="struts.devMode" value="true" />
+    <constant name="struts.action.extension" value="action" />
+    <constant name="struts.ui.theme" value="simple" />
+    <constant name="struts.multipart.maxSize" value="10485760" />
     
+    <!-- Main package for the application -->
     <package name="default" extends="struts-default" namespace="/">
         
+        <!-- Global exception mapping -->
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+        </global-exception-mappings>
+        
+        <!-- Global result mappings -->
+        <global-results>
+            <result name="error">/error.jsp</result>
+            <result name="login">/login.jsp</result>
+        </global-results>
+        
+        <!-- Authentication Actions -->
         <action name="register" class="RegisterAction" method="execute">
             <result name="input">/register.jsp</result>
-            <result name="success">/login.jsp</result>
+            <result name="success" type="redirect">/login.action</result>
             <result name="error">/register.jsp</result>
         </action>
         
         <action name="login" class="LoginAction" method="execute">
             <result name="input">/login.jsp</result>
-            <result name="success">/dashboard.jsp</result>
+            <result name="success" type="redirect">/dashboard.action</result>
             <result name="error">/login.jsp</result>
         </action>
         
         <action name="logout" class="LogoutAction" method="execute">
-            <result name="success">/index.jsp</result>
+            <result name="success" type="redirect">/index.jsp</result>
         </action>
         
-        <action name="simple" class="SimpleAction">
-            <result>/test.jsp</result>
+        <!-- Dashboard action -->
+        <action name="dashboard">
+            <result>/dashboard.jsp</result>
         </action>
         
-        <action name="myProfile" class="ProfileAction" method="myProfile">
-            <result name="success">/profile.jsp</result>
-            <result name="error">/dashboard.jsp</result>
+        <!-- Item management actions -->
+        <action name="viewItems" class="ViewItemsAction" method="execute">
+            <result name="success">/viewItems.jsp</result>
+            <result name="error">/error.jsp</result>
         </action>
         
-        <action name="allUsers" class="ProfileAction" method="allUsers">
-            <result name="success">/allUsers.jsp</result>
-            <result name="error">/dashboard.jsp</result>
+        <action name="addItemForm">
+            <result>/addItem.jsp</result>
         </action>
         
-        <action name="allItems" class="ItemAction" method="viewAllItems">
-            <result name="success">/allItems.jsp</result>
-            <result name="error">/dashboard.jsp</result>
-        </action>
-        
-        <action name="showAddItem" class="ItemAction" method="showAddForm">
-            <result name="success">/addItem.jsp</result>
-            <result name="error">/dashboard.jsp</result>
-        </action>
-        
-        <action name="addItem" class="ItemAction" method="addItem">
-            <result name="success">/allItems.jsp</result>
+        <action name="addItem" class="AddItemAction" method="execute">
+            <result name="success" type="redirect">/dashboard.action</result>
             <result name="input">/addItem.jsp</result>
             <result name="error">/addItem.jsp</result>
         </action>
         
-        <action name="myBids" class="BidAction" method="myBids">
+        <!-- Bidding actions -->
+        <action name="myBids" class="MyBidsAction" method="execute">
             <result name="success">/myBids.jsp</result>
-            <result name="error">/dashboard.jsp</result>
+            <result name="error">/error.jsp</result>
         </action>
         
-        <action name="itemBids" class="BidAction" method="viewItemBids">
+        <action name="placeBid" class="MyBidsAction" method="placeBid">
+            <result name="success" type="redirect">/myBids.action</result>
+            <result name="error">/myBids.jsp</result>
+        </action>
+        
+        <action name="viewItemBids" class="ViewItemBidsAction" method="execute">
             <result name="success">/itemBids.jsp</result>
-            <result name="error">/allItems.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        
+        <!-- User management actions -->
+        <action name="profile">
+            <result>/profile.jsp</result>
+        </action>
+        
+        <action name="viewOtherProfile" class="ViewOtherProfileAction" method="execute">
+            <result name="success">/otherProfile.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        
+        <action name="viewUsers" class="ViewUsersAction" method="execute">
+            <result name="success">/viewUsers.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        
+    </package>
+    
+    <!-- Package for secure actions requiring authentication -->
+    <package name="secure" extends="default" namespace="/secure">
+        
+        <!-- Interceptor stack for authentication -->
+        <interceptors>
+            <interceptor name="loginCheck" class="LoginCheckInterceptor"/>
+            <interceptor-stack name="secureStack">
+                <interceptor-ref name="defaultStack"/>
+                <interceptor-ref name="loginCheck"/>
+            </interceptor-stack>
+        </interceptors>
+        
+        <default-interceptor-ref name="secureStack"/>
+        
+        <!-- Secure actions -->
+        <action name="myProfile" class="ProfileAction" method="execute">
+            <result name="success">/profile.jsp</result>
+            <result name="login">/login.jsp</result>
+        </action>
+        
+        <action name="adminPanel" class="AdminAction" method="execute">
+            <result name="success">/admin.jsp</result>
+            <result name="unauthorized">/error.jsp</result>
         </action>
         
     </package>

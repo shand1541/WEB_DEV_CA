@@ -1,88 +1,94 @@
 import java.util.Map;
-import java.util.List;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.interceptor.SessionAware;
 
-@SuppressWarnings("rawtypes")
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class ProfileAction extends ActionSupport implements SessionAware {
     private static final long serialVersionUID = 1L;
     
-    public static final String LOGIN = "login";
-
+    private Member userProfile;
+    private String displayName;
+    private String emailAddress;
+    private String contactNumber;
+    private String postalAddress;
     private Map session;
-    private MemberDAO memberDAO = new MemberDAO();
-    private Member currentUser;
-    private Member profileUser;
-    private List<Member> allUsers;
-    private int userId;
     
-    // Helper methods for safe casting
-    private Integer getSessionUserId() {
-        Object userId = session.get("userId");
-        return userId instanceof Integer ? (Integer) userId : null;
-    }
-    
-    // View my profile
-    public String myProfile() {
+    public String execute() {
         try {
-            Integer sessionUserId = getSessionUserId();
-            if (sessionUserId == null) return LOGIN;
+            // Check if user is logged in
+            if (session == null || session.get("user") == null) {
+                return "login";
+            }
             
-            currentUser = memberDAO.getMemberById(sessionUserId);
-            if (currentUser == null) return ERROR;
+            userProfile = (Member) session.get("user");
+            
+            // Populate form fields with current user data
+            displayName = userProfile.getDisplayName();
+            emailAddress = userProfile.getEmailAddress();
+            contactNumber = userProfile.getContactNumber();
+            postalAddress = userProfile.getPostalAddress();
             
             return SUCCESS;
             
         } catch (Exception e) {
+            addActionError("Error loading profile: " + e.getMessage());
             return ERROR;
         }
     }
     
-    // View other user's profile
-    public String viewProfile() {
+    public String updateProfile() {
         try {
-            Integer sessionUserId = getSessionUserId();
-            if (sessionUserId == null) return LOGIN;
+            // Check if user is logged in
+            if (session == null || session.get("user") == null) {
+                return "login";
+            }
             
-            profileUser = memberDAO.getMemberById(userId);
-            if (profileUser == null) return ERROR;
+            userProfile = (Member) session.get("user");
+            
+            // Update user information
+            userProfile.setDisplayName(displayName != null ? displayName.trim() : userProfile.getDisplayName());
+            userProfile.setEmailAddress(emailAddress != null ? emailAddress.trim() : userProfile.getEmailAddress());
+            userProfile.setContactNumber(contactNumber != null ? contactNumber.trim() : userProfile.getContactNumber());
+            userProfile.setPostalAddress(postalAddress != null ? postalAddress.trim() : userProfile.getPostalAddress());
+            
+            // Save to database
+            MemberDAO memberDAO = new MemberDAO();
+            if (memberDAO.updateMember(userProfile)) {
+                // Update session with new data
+                session.put("user", userProfile);
+                session.put("displayName", userProfile.getDisplayName());
+                
+                addActionMessage("Profile updated successfully!");
+            } else {
+                addActionError("Failed to update profile. Please try again.");
+            }
             
             return SUCCESS;
             
         } catch (Exception e) {
-            return ERROR;
-        }
-    }
-    
-    // View all users
-    public String allUsers() {
-        try {
-            Integer sessionUserId = getSessionUserId();
-            if (sessionUserId == null) return LOGIN;
-            
-            allUsers = memberDAO.getAllMembers();
-            return SUCCESS;
-            
-        } catch (Exception e) {
+            addActionError("Error updating profile: " + e.getMessage());
             return ERROR;
         }
     }
     
     // Getters and Setters
-    public Member getCurrentUser() { return currentUser; }
-    public void setCurrentUser(Member currentUser) { this.currentUser = currentUser; }
+    public Member getUserProfile() { return userProfile; }
+    public void setUserProfile(Member userProfile) { this.userProfile = userProfile; }
     
-    public Member getProfileUser() { return profileUser; }
-    public void setProfileUser(Member profileUser) { this.profileUser = profileUser; }
+    public String getDisplayName() { return displayName; }
+    public void setDisplayName(String displayName) { this.displayName = displayName; }
     
-    public List<Member> getAllUsers() { return allUsers; }
-    public void setAllUsers(List<Member> allUsers) { this.allUsers = allUsers; }
+    public String getEmailAddress() { return emailAddress; }
+    public void setEmailAddress(String emailAddress) { this.emailAddress = emailAddress; }
     
-    public int getUserId() { return userId; }
-    public void setUserId(int userId) { this.userId = userId; }
+    public String getContactNumber() { return contactNumber; }
+    public void setContactNumber(String contactNumber) { this.contactNumber = contactNumber; }
+    
+    public String getPostalAddress() { return postalAddress; }
+    public void setPostalAddress(String postalAddress) { this.postalAddress = postalAddress; }
     
     @Override
-    public void setSession(Map session) {
-        this.session = session;
+    public void setSession(Map session) { 
+        this.session = session; 
     }
 }
