@@ -1,10 +1,15 @@
+import java.util.Map;
+import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.interceptor.SessionAware;
+
 // Login action for CA2
-public class LoginAction {
+public class LoginAction extends ActionSupport implements SessionAware {
+    private static final long serialVersionUID = 1L;
     
     private String username;
     private String password;
     private MemberDAO memberDAO = new MemberDAO();
-    private java.util.Map<String, Object> session = new java.util.HashMap<>();
+    private Map session;
     
     public String execute() {
         // Check if fields are filled in
@@ -36,6 +41,6 @@ public class LoginAction {
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
     
-    public void setSession(java.util.Map<String, Object> session) { this.session = session; }
-    public java.util.Map<String, Object> getSession() { return session; }
+    @Override
+    public void setSession(Map session) { this.session = session; }
 }
