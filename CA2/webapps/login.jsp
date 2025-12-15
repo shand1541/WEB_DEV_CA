@@ -13,6 +13,6 @@
         <s:password name="password" label="Password" />
         <s:submit value="Login" />
     </s:form>
-    <p><a href="register.jsp">Don't have an account? Register here</a></p>
+    <p><a href="/CA2/register.action">Don't have an account? Register here</a></p>
 </body>
 </html>

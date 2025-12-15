@@ -6,20 +6,36 @@
 <struts>
     <constant name="struts.devMode" value="true" />
     
-    <package name="default" extends="struts-default">
+    <!-- Root package for direct JSP access -->
+    <package name="root" extends="struts-default" namespace="/">
+        <action name="login" class="LoginAction">
+            <result name="success">/dashboard.jsp</result>
+            <result name="error">/login.jsp</result>
+            <result name="input">/login.jsp</result>
+        </action>
+        
+        <action name="register" class="RegisterAction">
+            <result name="success">/login.jsp</result>
+            <result name="error">/register.jsp</result>
+            <result name="input">/register.jsp</result>
+        </action>
+    </package>
+    
+    <!-- CA2 package -->
+    <package name="default" extends="struts-default" namespace="/CA2">
         
         <!-- Login Action -->
         <action name="login" class="LoginAction">
-            <result name="success">dashboard.jsp</result>
-            <result name="error">login.jsp</result>
-            <result name="input">login.jsp</result>
+            <result name="success">/dashboard.jsp</result>
+            <result name="error">/login.jsp</result>
+            <result name="input">/login.jsp</result>
         </action>
         
         <!-- Register Action -->
         <action name="register" class="RegisterAction">
-            <result name="success">login.jsp</result>
-            <result name="error">register.jsp</result>
-            <result name="input">register.jsp</result>
+            <result name="success">/login.jsp</result>
+            <result name="error">/register.jsp</result>
+            <result name="input">/register.jsp</result>
         </action>
         
     </package>
