@@ -1,7 +1,6 @@
 
 import java.util.Map;
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.struts2.interceptor.SessionAware;
 
 @SuppressWarnings({"all", "unchecked", "rawtypes", "serial"})
 public class RegisterAction extends ActionSupport {
@@ -21,13 +20,13 @@ public class RegisterAction extends ActionSupport {
         // Check if required fields are filled
         if (username == null || email == null || password == null || 
             username.trim().isEmpty() || email.trim().isEmpty() || password.trim().isEmpty()) {
-            return "input"; // go back to form
+            return INPUT; // go back to form
         }
         
         try {
             // Check if username already taken
             if (memberDAO.usernameExists(username.trim())) {
-                return "error"; // show error
+                return ERROR; // show error
             }
             
             // Create new user object
@@ -40,12 +39,12 @@ public class RegisterAction extends ActionSupport {
             member.setPostalAddress(address != null ? address.trim() : null);
             
             if (memberDAO.registerMember(member)) {
-                return "success";
+                return SUCCESS;
             } else {
-                return "error";
+                return ERROR;
             }
         } catch (Exception e) {
-            return "error";
+            return ERROR;
         }
     }
     

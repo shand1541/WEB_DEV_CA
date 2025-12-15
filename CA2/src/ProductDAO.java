@@ -1,5 +1,7 @@
 import java.sql.*;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.ArrayList;
 
 //  products/items for sale
 public class ProductDAO {
@@ -26,15 +28,31 @@ public class ProductDAO {
     }
     
     // Get all items for sale
-    public ResultSet getAllProducts() {
-        try {
-            Connection conn = DatabaseManager.getConnection();
-            String sql = "SELECT * FROM products WHERE listing_status = 'active'";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            return stmt.executeQuery();
+    public List<Product> getAllProducts() {
+        List<Product> products = new ArrayList<>();
+        String sql = "SELECT * FROM products WHERE listing_status = 'active' ORDER BY listing_date DESC";
+        
+        try (Connection conn = DatabaseManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+            
+            while (rs.next()) {
+                Product product = new Product();
+                product.setProductId(rs.getInt("product_id"));
+                product.setProductName(rs.getString("product_name"));
+                product.setProductDetails(rs.getString("product_details"));
+                product.setProductCategory(rs.getString("product_category"));
+                product.setMinimumBid(rs.getBigDecimal("minimum_bid"));
+                product.setHighestBid(rs.getBigDecimal("highest_bid"));
+                product.setOwnerId(rs.getInt("owner_id"));
+                product.setListingStatus(rs.getString("listing_status"));
+                product.setListingDate(rs.getTimestamp("listing_date"));
+                products.add(product);
+            }
+            
         } catch (SQLException e) {
             System.err.println("Error getting products: " + e.getMessage());
-            return null;
         }
+        return products;
     }
 } 

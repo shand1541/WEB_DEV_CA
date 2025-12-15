@@ -6,7 +6,9 @@ import org.apache.struts2.interceptor.SessionAware;
 public class ProfileAction extends ActionSupport implements SessionAware {
     private static final long serialVersionUID = 1L;
     
-    private Map<String, Object> session;
+    public static final String LOGIN = "login";
+
+    private Map session;
     private MemberDAO memberDAO = new MemberDAO();
     private Member currentUser;
     private Member profileUser;
@@ -17,15 +19,15 @@ public class ProfileAction extends ActionSupport implements SessionAware {
     public String myProfile() {
         try {
             Integer sessionUserId = (Integer) session.get("userId");
-            if (sessionUserId == null) return "login";
+            if (sessionUserId == null) return LOGIN;
             
             currentUser = memberDAO.getMemberById(sessionUserId);
-            if (currentUser == null) return "error";
+            if (currentUser == null) return ERROR;
             
-            return "success";
+            return SUCCESS;
             
         } catch (Exception e) {
-            return "error";
+            return ERROR;
         }
     }
     
@@ -33,15 +35,15 @@ public class ProfileAction extends ActionSupport implements SessionAware {
     public String viewProfile() {
         try {
             Integer sessionUserId = (Integer) session.get("userId");
-            if (sessionUserId == null) return "login";
+            if (sessionUserId == null) return LOGIN;
             
             profileUser = memberDAO.getMemberById(userId);
-            if (profileUser == null) return "error";
+            if (profileUser == null) return ERROR;
             
-            return "success";
+            return SUCCESS;
             
         } catch (Exception e) {
-            return "error";
+            return ERROR;
         }
     }
     
@@ -49,13 +51,13 @@ public class ProfileAction extends ActionSupport implements SessionAware {
     public String allUsers() {
         try {
             Integer sessionUserId = (Integer) session.get("userId");
-            if (sessionUserId == null) return "login";
+            if (sessionUserId == null) return LOGIN;
             
             allUsers = memberDAO.getAllMembers();
-            return "success";
+            return SUCCESS;
             
         } catch (Exception e) {
-            return "error";
+            return ERROR;
         }
     }
     
@@ -73,7 +75,7 @@ public class ProfileAction extends ActionSupport implements SessionAware {
     public void setUserId(int userId) { this.userId = userId; }
     
     @Override
-    public void setSession(Map<String, Object> session) {
+    public void setSession(Map session) {
         this.session = session;
     }
 }

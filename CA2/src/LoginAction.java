@@ -8,7 +8,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
     private String username;
     private String password;
     private MemberDAO memberDAO = new MemberDAO();
-    private Map<String, Object> session;
+    private Map session;
     
     public String execute() {
         // Check if fields are filled in - first time loading login.jsp
@@ -25,14 +25,14 @@ public class LoginAction extends ActionSupport implements SessionAware {
                 session.put("user", member);
                 session.put("userId", member.getMemberId());
                 session.put("displayName", member.getDisplayName());
-                return "success"; 
+                return SUCCESS; 
             } else {
                 // Login failed
-                return "error"; // show error message
+                return ERROR; // show error message
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return "error";
+            return ERROR;
         }
     }
     
@@ -44,7 +44,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
     public void setPassword(String password) { this.password = password; }
     
     @Override
-    public void setSession(Map<String, Object> session) { 
+    public void setSession(Map session) { 
         this.session = session; 
     }
 }

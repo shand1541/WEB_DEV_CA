@@ -5,7 +5,7 @@ import org.apache.struts2.interceptor.SessionAware;
 public class LogoutAction extends ActionSupport implements SessionAware {
     private static final long serialVersionUID = 1L;
     
-    private Map<String, Object> session;
+    private Map session;
     
     public String execute() {
         try {
@@ -17,15 +17,15 @@ public class LogoutAction extends ActionSupport implements SessionAware {
                 session.clear();
             }
             
-            return "success";
+            return SUCCESS;
             
         } catch (Exception e) {
-            return "error";
+            return ERROR;
         }
     }
     
     @Override
-    public void setSession(Map<String, Object> session) {
+    public void setSession(Map session) {
         this.session = session;
     }
 }

@@ -16,31 +16,32 @@ CREATE TABLE IF NOT EXISTS members (
     account_status ENUM('active', 'suspended', 'deleted') DEFAULT 'active'
 );
 
--- Insert test user (password is 'password' hashed)
+-- Insert test user (password is 'password')
 INSERT INTO members (login_name, email_address, password_hash, display_name, contact_number, postal_address) 
 VALUES ('testuser', 'test@example.com', 'password', 'Test User', '123-456-7890', '123 Test Street, Test City');
 
--- Create products table (for future use)
+-- Create products table
 CREATE TABLE IF NOT EXISTS products (
     product_id INT AUTO_INCREMENT PRIMARY KEY,
     product_name VARCHAR(100) NOT NULL,
-    description TEXT,
-    price DECIMAL(10,2) NOT NULL,
-    category VARCHAR(50),
-    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status ENUM('active', 'inactive', 'deleted') DEFAULT 'active'
+    product_details TEXT,
+    product_category VARCHAR(50),
+    minimum_bid DECIMAL(10,2) NOT NULL,
+    highest_bid DECIMAL(10,2) DEFAULT 0.00,
+    owner_id INT NOT NULL,
+    listing_status ENUM('active', 'inactive', 'deleted') DEFAULT 'active',
+    listing_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (owner_id) REFERENCES members(member_id)
 );
 
--- Create bids table (for future use)
-CREATE TABLE IF NOT EXISTS bids (
+-- Create bidding_history table
+CREATE TABLE IF NOT EXISTS bidding_history (
     bid_id INT AUTO_INCREMENT PRIMARY KEY,
     product_id INT,
     member_id INT,
-    bid_amount DECIMAL(10,2) NOT NULL,
-    bid_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status ENUM('active', 'withdrawn', 'accepted', 'rejected') DEFAULT 'active',
+    bid_value DECIMAL(10,2) NOT NULL,
+    bid_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    bid_status ENUM('active', 'withdrawn', 'accepted', 'rejected') DEFAULT 'active',
     FOREIGN KEY (product_id) REFERENCES products(product_id),
     FOREIGN KEY (member_id) REFERENCES members(member_id)
 );
-
-SELECT 'Database setup completed successfully!' as message;

@@ -7,7 +7,7 @@ import org.apache.struts2.interceptor.SessionAware;
 public class BidAction extends ActionSupport implements SessionAware {
     private static final long serialVersionUID = 1L;
     
-    private Map<String, Object> session;
+    private Map session;
     
     // Bid form fields
     private int productId;
@@ -41,13 +41,13 @@ public class BidAction extends ActionSupport implements SessionAware {
             System.err.println("Error placing bid: " + e.getMessage());
         }
         
-        return "success";
+        return SUCCESS;
     }
     
     // View my bids
     public String myBids() {
         Integer userId = (Integer) session.get("userId");
-        if (userId == null) return "login";
+        if (userId == null) return LOGIN;
         
         try {
             Connection conn = DatabaseManager.getConnection();
@@ -59,13 +59,13 @@ public class BidAction extends ActionSupport implements SessionAware {
             System.err.println("Error getting my bids: " + e.getMessage());
         }
         
-        return "success";
+        return SUCCESS;
     }
     
     // View all bids on a specific item
     public String viewItemBids() {
         Integer userId = (Integer) session.get("userId");
-        if (userId == null) return "login";
+        if (userId == null) return LOGIN;
         
         try {
             Connection conn = DatabaseManager.getConnection();
@@ -77,14 +77,14 @@ public class BidAction extends ActionSupport implements SessionAware {
             System.err.println("Error getting bids: " + e.getMessage());
         }
         
-        return "success";
+        return SUCCESS;
     }
     
     // Show bid form for a specific product
     public String showBidForm() {
         Integer userId = (Integer) session.get("userId");
-        if (userId == null) return "login";
-        return "input";
+        if (userId == null) return LOGIN;
+        return INPUT;
     }
     
     // Getters and Setters
@@ -101,7 +101,7 @@ public class BidAction extends ActionSupport implements SessionAware {
     public void setProductBids(ResultSet productBids) { this.productBids = productBids; }
     
     @Override
-    public void setSession(Map<String, Object> session) {
+    public void setSession(Map session) {
         this.session = session;
     }
 }
