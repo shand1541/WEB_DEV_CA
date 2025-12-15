@@ -1,5 +1,4 @@
--- CA2 Database Setup Script
-
+-- Create database
 CREATE DATABASE IF NOT EXISTS ecommerce_ca2;
 USE ecommerce_ca2;
 
@@ -16,11 +15,11 @@ CREATE TABLE IF NOT EXISTS members (
     account_status ENUM('active', 'suspended', 'deleted') DEFAULT 'active'
 );
 
--- Insert test user (password is 'password' hashed)
+-- Insert test user (password is 'password')
 INSERT INTO members (login_name, email_address, password_hash, display_name, contact_number, postal_address) 
 VALUES ('testuser', 'test@example.com', 'password', 'Test User', '123-456-7890', '123 Test Street, Test City');
 
--- Create products table (for future use)
+-- Create products table 
 CREATE TABLE IF NOT EXISTS products (
     product_id INT AUTO_INCREMENT PRIMARY KEY,
     product_name VARCHAR(100) NOT NULL,
@@ -31,7 +30,7 @@ CREATE TABLE IF NOT EXISTS products (
     status ENUM('active', 'inactive', 'deleted') DEFAULT 'active'
 );
 
--- Create bids table (for future use)
+-- Create bids table
 CREATE TABLE IF NOT EXISTS bids (
     bid_id INT AUTO_INCREMENT PRIMARY KEY,
     product_id INT,

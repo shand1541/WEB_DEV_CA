@@ -1,5 +1,5 @@
 import java.util.Map;
-import com.opensymphony.xwork2.ActionSupport; 
+import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.interceptor.SessionAware; 
 
 // Login action for CA2
@@ -17,7 +17,8 @@ public class LoginAction extends ActionSupport implements SessionAware {
         // Check if fields are filled in
         if (username == null || password == null || 
             username.trim().isEmpty() || password.trim().isEmpty()) {
-            return "input"; // go back to login
+            addActionError("Username and password are required.");
+            return INPUT; // go back to login with error
         }
         
         try {
@@ -26,13 +27,17 @@ public class LoginAction extends ActionSupport implements SessionAware {
             if (member != null) {
                 // Login successful 
                 session.put("user", member);
-                return "success"; // go to dashboard
+                addActionMessage("Login successful! Welcome " + member.getDisplayName());
+                return SUCCESS; // go to dashboard
             } else {
                 // Login failed
-                return "error"; //  error message
+                addActionError("Invalid username or password. Please try again.");
+                return ERROR; //  error message
             }
         } catch (Exception e) {
-            return "error";
+            addActionError("An error occurred during login: " + e.getMessage());
+            e.printStackTrace(); // for debugging
+            return ERROR;
         }
     }
     

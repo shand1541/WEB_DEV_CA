@@ -1,6 +1,6 @@
 
 import java.util.Map;
-import com.opensymphony.xwork2.ActionSupport; 
+import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.interceptor.SessionAware;
 
 @SuppressWarnings({"all", "unchecked", "rawtypes", "serial"})
