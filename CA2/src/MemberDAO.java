@@ -105,26 +105,6 @@ public class MemberDAO {
         return members;
     }
     
-    // Check if username already exists
-    public boolean usernameExists(String username) {
-        String sql = "SELECT COUNT(*) FROM members WHERE login_name = ?";
-        
-        try (Connection conn = DatabaseManager.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            
-            stmt.setString(1, username);
-            ResultSet rs = stmt.executeQuery();
-            
-            if (rs.next()) {
-                return rs.getInt(1) > 0; // return true if count > 0
-            }
-            
-        } catch (SQLException e) {
-            System.err.println("Error checking username: " + e.getMessage());
-        }
-        return false; // assume username doesn't exist on error
-    }
-    
     // View member by ID
     public Member getMemberById(int memberId) {
         String sql = "SELECT * FROM members WHERE member_id = ? AND account_status = 'active'";
