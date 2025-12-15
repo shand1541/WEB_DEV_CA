@@ -1,14 +1,24 @@
 {
-    "java.project.referencedLibraries": [
-        "webapps/WEB_INF/lib/**/*.jar",
-        "lib/**/*.jar"
+    "java.project.sourcePaths": [
+        "src",
+        "webapps/WEB_INF/src"
     ],
-    "java.compile.nullAnalysis.mode": "disabled", 
+    "java.project.outputPath": "webapps/WEB_INF/classes",
+    "java.project.referencedLibraries": {
+        "include": [
+            "webapps/WEB_INF/lib/xwork-2.0.4.jar",
+            "webapps/WEB_INF/lib/struts2-core-2.0.11.jar",
+            "webapps/WEB_INF/lib/freemarker-2.3.8.jar",
+            "webapps/WEB_INF/lib/ognl-2.6.11.jar",
+            "webapps/WEB_INF/lib/commons-logging-1.0.4.jar",
+            "webapps/WEB_INF/lib/jstl.jar",
+            "webapps/WEB_INF/lib/mysql-connector-j-8.0.31.jar"
+        ]
+    },
+    "java.compile.nullAnalysis.mode": "disabled",
     "java.configuration.updateBuildConfiguration": "automatic",
+    "java.errors.incompleteClasspath.severity": "ignore",
     "java.import.gradle.enabled": false,
     "java.import.maven.enabled": false,
-    "java.import.eclipse.enabled": true,
-    "java.clean.workspace": true,
-    "java.sources.organizeImports.starThreshold": 99,
-    "java.sources.organizeImports.staticStarThreshold": 99
+    "java.clean.workspace": true
 }

@@ -1,6 +1,6 @@
 import java.util.Map;
-import com.opensymphony.xwork2.ActionSupport;
-import org.apache.struts2.interceptor.SessionAware;
+import com.opensymphony.xwork2.ActionSupport; 
+import org.apache.struts2.interceptor.SessionAware; 
 
 // Login action for CA2
 @SuppressWarnings({"all", "unchecked", "rawtypes", "serial"})
