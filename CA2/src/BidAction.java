@@ -4,10 +4,17 @@ import java.sql.*;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.interceptor.SessionAware;
 
+@SuppressWarnings("rawtypes")
 public class BidAction extends ActionSupport implements SessionAware {
     private static final long serialVersionUID = 1L;
     
     private Map session;
+    
+    // Helper method for safe casting
+    private Integer getSessionUserId() {
+        Object userId = session.get("userId");
+        return userId instanceof Integer ? (Integer) userId : null;
+    }
     
     // Bid form fields
     private int productId;
@@ -19,7 +26,7 @@ public class BidAction extends ActionSupport implements SessionAware {
     
     // Place a bid on an item
     public String placeBid() {
-        Integer userId = (Integer) session.get("userId");
+        Integer userId = getSessionUserId();
         if (userId == null) return "login";
         
         try (Connection conn = DatabaseManager.getConnection()) {
@@ -46,7 +53,7 @@ public class BidAction extends ActionSupport implements SessionAware {
     
     // View my bids
     public String myBids() {
-        Integer userId = (Integer) session.get("userId");
+        Integer userId = getSessionUserId();
         if (userId == null) return LOGIN;
         
         try {
@@ -64,7 +71,7 @@ public class BidAction extends ActionSupport implements SessionAware {
     
     // View all bids on a specific item
     public String viewItemBids() {
-        Integer userId = (Integer) session.get("userId");
+        Integer userId = getSessionUserId();
         if (userId == null) return LOGIN;
         
         try {
@@ -82,7 +89,7 @@ public class BidAction extends ActionSupport implements SessionAware {
     
     // Show bid form for a specific product
     public String showBidForm() {
-        Integer userId = (Integer) session.get("userId");
+        Integer userId = getSessionUserId();
         if (userId == null) return LOGIN;
         return INPUT;
     }

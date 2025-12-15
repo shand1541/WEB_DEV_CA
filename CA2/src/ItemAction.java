@@ -4,11 +4,18 @@ import java.math.BigDecimal;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.interceptor.SessionAware;
 
+@SuppressWarnings("rawtypes")
 public class ItemAction extends ActionSupport implements SessionAware {
     private static final long serialVersionUID = 1L;
     
     private Map session;
     private ProductDAO productDAO = new ProductDAO();
+    
+    // Helper method for safe casting
+    private Integer getSessionUserId() {
+        Object userId = session.get("userId");
+        return userId instanceof Integer ? (Integer) userId : null;
+    }
     
     // Item form fields
     private String itemName;
@@ -22,7 +29,7 @@ public class ItemAction extends ActionSupport implements SessionAware {
     // Add new item for sale
     public String addItem() {
         try {
-            Integer userId = (Integer) session.get("userId");
+            Integer userId = getSessionUserId();
             if (userId == null) return LOGIN;
             
             if (itemName == null || itemName.trim().isEmpty()) return INPUT;
@@ -50,7 +57,7 @@ public class ItemAction extends ActionSupport implements SessionAware {
     // View all items for sale
     public String viewAllItems() {
         try {
-            Integer userId = (Integer) session.get("userId");
+            Integer userId = getSessionUserId();
             if (userId == null) return LOGIN;
             
             allItems = productDAO.getAllProducts();
@@ -63,7 +70,7 @@ public class ItemAction extends ActionSupport implements SessionAware {
     
     // Show add item form
     public String showAddForm() {
-        Integer userId = (Integer) session.get("userId");
+        Integer userId = getSessionUserId();
         if (userId == null) return LOGIN;
         return INPUT;
     }

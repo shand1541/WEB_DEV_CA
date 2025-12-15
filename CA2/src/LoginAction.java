@@ -2,6 +2,7 @@ import java.util.Map;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.interceptor.SessionAware;
 
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class LoginAction extends ActionSupport implements SessionAware {
     private static final long serialVersionUID = 1L;
     

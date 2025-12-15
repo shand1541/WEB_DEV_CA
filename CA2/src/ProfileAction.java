@@ -3,6 +3,7 @@ import java.util.List;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.interceptor.SessionAware;
 
+@SuppressWarnings("rawtypes")
 public class ProfileAction extends ActionSupport implements SessionAware {
     private static final long serialVersionUID = 1L;
     
@@ -15,10 +16,16 @@ public class ProfileAction extends ActionSupport implements SessionAware {
     private List<Member> allUsers;
     private int userId;
     
+    // Helper methods for safe casting
+    private Integer getSessionUserId() {
+        Object userId = session.get("userId");
+        return userId instanceof Integer ? (Integer) userId : null;
+    }
+    
     // View my profile
     public String myProfile() {
         try {
-            Integer sessionUserId = (Integer) session.get("userId");
+            Integer sessionUserId = getSessionUserId();
             if (sessionUserId == null) return LOGIN;
             
             currentUser = memberDAO.getMemberById(sessionUserId);
@@ -34,7 +41,7 @@ public class ProfileAction extends ActionSupport implements SessionAware {
     // View other user's profile
     public String viewProfile() {
         try {
-            Integer sessionUserId = (Integer) session.get("userId");
+            Integer sessionUserId = getSessionUserId();
             if (sessionUserId == null) return LOGIN;
             
             profileUser = memberDAO.getMemberById(userId);
@@ -50,7 +57,7 @@ public class ProfileAction extends ActionSupport implements SessionAware {
     // View all users
     public String allUsers() {
         try {
-            Integer sessionUserId = (Integer) session.get("userId");
+            Integer sessionUserId = getSessionUserId();
             if (sessionUserId == null) return LOGIN;
             
             allUsers = memberDAO.getAllMembers();
