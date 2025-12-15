@@ -31,13 +31,13 @@
             </div>
         </s:if>
         
-        <s:form action="login" method="post">
+        <s:form action="LoginServlet" method="post">
             <s:textfield name="username" label="Username" required="true"/>
             <s:password name="password" label="Password" required="true"/>
             <s:submit value="Login" />
         </s:form>
         
-        <p><a href="register.action">Don't have an account? Register here</a></p>
+        <p><a href="register.jsp">Don't have an account? Register here</a></p>
         <p><a href="index.jsp">Back to Home</a></p>
     </div>
 </body>

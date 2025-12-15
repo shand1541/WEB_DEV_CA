@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+    
+    <package name="default" extends="struts-default" namespace="/">
+        
+        <action name="register" class="RegisterAction" method="execute">
+            <result name="input">/register.jsp</result>
+            <result name="success">/login.jsp</result>
+            <result name="error">/register.jsp</result>
+        </action>
+        
+        <action name="login" class="LoginAction" method="execute">
+            <result name="input">/login.jsp</result>
+            <result name="success">/dashboard.jsp</result>
+            <result name="error">/login.jsp</result>
+        </action>
+        
+        <action name="logout" class="LogoutAction" method="execute">
+            <result name="success">/index.jsp</result>
+        </action>
+        
+        <action name="simple" class="SimpleAction">
+            <result>/test.jsp</result>
+        </action>
+        
+        <action name="myProfile" class="ProfileAction" method="myProfile">
+            <result name="success">/profile.jsp</result>
+            <result name="error">/dashboard.jsp</result>
+        </action>
+        
+        <action name="allUsers" class="ProfileAction" method="allUsers">
+            <result name="success">/allUsers.jsp</result>
+            <result name="error">/dashboard.jsp</result>
+        </action>
+        
+        <action name="allItems" class="ItemAction" method="viewAllItems">
+            <result name="success">/allItems.jsp</result>
+            <result name="error">/dashboard.jsp</result>
+        </action>
+        
+        <action name="showAddItem" class="ItemAction" method="showAddForm">
+            <result name="success">/addItem.jsp</result>
+            <result name="error">/dashboard.jsp</result>
+        </action>
+        
+        <action name="addItem" class="ItemAction" method="addItem">
+            <result name="success">/allItems.jsp</result>
+            <result name="input">/addItem.jsp</result>
+            <result name="error">/addItem.jsp</result>
+        </action>
+        
+        <action name="myBids" class="BidAction" method="myBids">
+            <result name="success">/myBids.jsp</result>
+            <result name="error">/dashboard.jsp</result>
+        </action>
+        
+        <action name="itemBids" class="BidAction" method="viewItemBids">
+            <result name="success">/itemBids.jsp</result>
+            <result name="error">/allItems.jsp</result>
+        </action>
+        
+    </package>
+</struts>

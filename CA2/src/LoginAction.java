@@ -8,8 +8,12 @@ public class LoginAction extends ActionSupport implements SessionAware {
     
     private String username;
     private String password;
-    private MemberDAO memberDAO = new MemberDAO();
+    private MemberDAO memberDAO;
     private Map session;
+    
+    public LoginAction() {
+        // Default constructor required by Struts2
+    }
     
     public String execute() {
         // Check if fields are filled in - first time loading login.jsp
@@ -19,6 +23,9 @@ public class LoginAction extends ActionSupport implements SessionAware {
         }
         
         try {
+            // Initialize DAO here instead of in constructor
+            memberDAO = new MemberDAO();
+            
             // Try to login 
             Member member = memberDAO.loginMember(username.trim(), password);
             if (member != null) {

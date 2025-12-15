@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Welcome to CA2 E-commerce Site</h1>
-    <p><a href="login.action">Login</a></p>
-    <p><a href="register.action">Register</a></p>
+    <p><a href="login.jsp">Login</a></p>
+    <p><a href="register.jsp">Register</a></p>
 </body>
 </html>

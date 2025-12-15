@@ -12,7 +12,11 @@ public class RegisterAction extends ActionSupport {
     private String phone;
     private String address;
     
-    private MemberDAO memberDAO = new MemberDAO();
+    private MemberDAO memberDAO;
+    
+    public RegisterAction() {
+        // Default constructor required by Struts2
+    }
     
     @SuppressWarnings("all")
     public String execute() {
@@ -23,6 +27,9 @@ public class RegisterAction extends ActionSupport {
         }
         
         try {
+            // Initialize DAO here instead of in constructor
+            memberDAO = new MemberDAO();
+            
             // Check if username already taken
             if (memberDAO.usernameExists(username.trim())) {
                 return ERROR; // show error

@@ -8,7 +8,7 @@
 </head>
 <body>
     <h2>Register New Account</h2>
-    <s:form action="register">
+    <s:form action="RegisterServlet">
         <s:textfield name="username" label="Username" />
         <s:textfield name="email" label="Email" />
         <s:password name="password" label="Password" />
@@ -17,6 +17,6 @@
         <s:textfield name="address" label="Address" />
         <s:submit value="Register" />
     </s:form>
-    <p><a href="login.action">Already have an account? Login here</a></p>
+    <p><a href="login.jsp">Already have an account? Login here</a></p>
 </body>
 </html>
