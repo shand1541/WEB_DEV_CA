@@ -1,0 +1,8 @@
+{
+    "java.project.referencedLibraries": [
+        "webapps/WEB_INF/lib/*.jar",
+        "lib/*.jar"
+    ],
+    "java.compile.nullAnalysis.mode": "disabled",
+    "java.configuration.updateBuildConfiguration": "automatic"
+}

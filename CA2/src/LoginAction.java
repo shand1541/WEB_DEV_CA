@@ -3,7 +3,9 @@ import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.interceptor.SessionAware;
 
 // Login action for CA2
+
 public class LoginAction extends ActionSupport implements SessionAware {
+   
     
     private String username;
     private String password;
@@ -12,19 +14,27 @@ public class LoginAction extends ActionSupport implements SessionAware {
     
     public String execute() {
         // Check if fields are filled in
-        if (username == null || password == null) {
+        if (username == null || password == null || 
+            username.trim().isEmpty() || password.trim().isEmpty()) {
+            addActionError("Username and password are required.");
             return "input"; // go back to login 
         }
         
-        // Try to login 
-        Member member = memberDAO.loginMember(username, password);
-        if (member != null) {
-            // Login successful 
-            session.put("user", member);
-            return "success"; // go to dashboard
-        } else {
-            // Login failed
-            return "error"; //  error message
+        try {
+            // Try to login 
+            Member member = memberDAO.loginMember(username.trim(), password);
+            if (member != null) {
+                // Login successful 
+                session.put("user", member);
+                return "success"; // go to dashboard
+            } else {
+                // Login failed
+                addActionError("Invalid username or password.");
+                return "error"; //  error message
+            }
+        } catch (Exception e) {
+            addActionError("Login system error. Please try again.");
+            return "error";
         }
     }
     
