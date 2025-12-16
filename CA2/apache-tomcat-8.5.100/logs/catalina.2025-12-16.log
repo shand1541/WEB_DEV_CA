@@ -239,3 +239,70 @@
 		at java.lang.Thread.run(Thread.java:838)
 16-Dec-2025 11:59:47.252 WARNING [http-nio-8080-exec-8] org.apache.struts2.components.Form.evaluateExtraParamsServletRequest No configuration found for the specified action: 'login' in namespace: ''. Form action defaulting to 'action' attribute's literal value.
 16-Dec-2025 11:59:49.437 WARNING [http-nio-8080-exec-8] org.apache.struts2.components.Form.evaluateExtraParamsServletRequest No configuration found for the specified action: 'login' in namespace: ''. Form action defaulting to 'action' attribute's literal value.
+16-Dec-2025 12:10:32.452 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.startup.HostConfig.undeploy Undeploying context [/ca2]
+16-Dec-2025 12:10:32.469 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.session.StandardManager.stopInternal Exception unloading sessions to persistent storage
+	java.io.FileNotFoundException: C:\Users\I762635\Desktop\WebDev_Projects\WEB_DEV_CA\CA2\apache-tomcat-8.5.100\work\Catalina\localhost\ca2\SESSIONS.ser (The system cannot find the path specified)
+		at java.io.FileOutputStream.open0(Native Method)
+		at java.io.FileOutputStream.open(FileOutputStream.java:270)
+		at java.io.FileOutputStream.<init>(FileOutputStream.java:213)
+		at java.io.FileOutputStream.<init>(FileOutputStream.java:101)
+		at org.apache.catalina.session.StandardManager.doUnload(StandardManager.java:293)
+		at org.apache.catalina.session.StandardManager.unload(StandardManager.java:259)
+		at org.apache.catalina.session.StandardManager.stopInternal(StandardManager.java:374)
+		at org.apache.catalina.util.LifecycleBase.stop(LifecycleBase.java:242)
+		at org.apache.catalina.core.StandardContext.stopInternal(StandardContext.java:5123)
+		at org.apache.catalina.util.LifecycleBase.stop(LifecycleBase.java:242)
+		at org.apache.catalina.core.ContainerBase.removeChild(ContainerBase.java:796)
+		at org.apache.catalina.startup.HostConfig.undeploy(HostConfig.java:1439)
+		at org.apache.catalina.startup.HostConfig.checkResources(HostConfig.java:1368)
+		at org.apache.catalina.startup.HostConfig.check(HostConfig.java:1621)
+		at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:309)
+		at org.apache.catalina.util.LifecycleBase.fireLifecycleEvent(LifecycleBase.java:114)
+		at org.apache.catalina.core.ContainerBase.backgroundProcess(ContainerBase.java:1108)
+		at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1333)
+		at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1337)
+		at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1305)
+		at java.lang.Thread.run(Thread.java:838)
+16-Dec-2025 12:10:32.487 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ca2] created a ThreadLocal with key of type [com.opensymphony.xwork2.inject.ContainerImpl$10] (value [com.opensymphony.xwork2.inject.ContainerImpl$10@353ed0f9]) and a value of type [com.opensymphony.xwork2.inject.InternalContext[]] (value [[Lcom.opensymphony.xwork2.inject.InternalContext;@3257b758]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+16-Dec-2025 12:11:02.544 INFO [localhost-startStop-4] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [C:\Users\I762635\Desktop\WebDev_Projects\WEB_DEV_CA\CA2\apache-tomcat-8.5.100\webapps\ca2.war]
+16-Dec-2025 12:11:05.708 INFO [localhost-startStop-4] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+16-Dec-2025 12:11:06.051 INFO [localhost-startStop-4] com.opensymphony.xwork2.config.providers.XmlConfigurationProvider.register Parsing configuration file [struts-default.xml]
+16-Dec-2025 12:11:06.333 INFO [localhost-startStop-4] com.opensymphony.xwork2.config.providers.XmlConfigurationProvider.register Parsing configuration file [struts-plugin.xml]
+16-Dec-2025 12:11:06.335 INFO [localhost-startStop-4] com.opensymphony.xwork2.config.providers.XmlConfigurationProvider.register Parsing configuration file [struts.xml]
+16-Dec-2025 12:11:06.349 WARNING [localhost-startStop-4] org.apache.struts2.config.Settings.getLocale Settings: Could not parse struts.locale setting, substituting default VM locale
+16-Dec-2025 12:11:07.276 INFO [localhost-startStop-4] com.opensymphony.xwork2.util.ObjectTypeDeterminerFactory.<clinit> Setting DefaultObjectTypeDeterminer as default ...
+16-Dec-2025 12:11:07.292 INFO [localhost-startStop-4] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [C:\Users\I762635\Desktop\WebDev_Projects\WEB_DEV_CA\CA2\apache-tomcat-8.5.100\webapps\ca2.war] has finished in [4,748] ms
+16-Dec-2025 12:11:28.814 WARNING [http-nio-8080-exec-21] org.apache.struts2.components.Form.evaluateExtraParamsServletRequest No configuration found for the specified action: 'login' in namespace: ''. Form action defaulting to 'action' attribute's literal value.
+16-Dec-2025 12:11:30.867 WARNING [http-nio-8080-exec-21] org.apache.struts2.components.Form.evaluateExtraParamsServletRequest No configuration found for the specified action: 'login' in namespace: ''. Form action defaulting to 'action' attribute's literal value.
+16-Dec-2025 12:11:45.933 SEVERE [http-nio-8080-exec-23] org.apache.struts2.dispatcher.Dispatcher.serviceAction Could not find action or result
+	There is no Action mapped for namespace / and action name dashboard. - [unknown location]
+		at com.opensymphony.xwork2.DefaultActionProxy.prepare(DefaultActionProxy.java:186)
+		at org.apache.struts2.impl.StrutsActionProxyFactory.createActionProxy(StrutsActionProxyFactory.java:41)
+		at org.apache.struts2.dispatcher.Dispatcher.serviceAction(Dispatcher.java:494)
+		at org.apache.struts2.dispatcher.FilterDispatcher.doFilter(FilterDispatcher.java:419)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:181)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:156)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:679)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:617)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:934)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1690)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.lang.Thread.run(Thread.java:838)
+16-Dec-2025 12:11:51.528 WARNING [http-nio-8080-exec-15] org.apache.struts2.components.Form.evaluateExtraParamsServletRequest No configuration found for the specified action: 'login' in namespace: ''. Form action defaulting to 'action' attribute's literal value.
+16-Dec-2025 12:11:51.742 WARNING [http-nio-8080-exec-15] org.apache.struts2.components.Form.evaluateExtraParamsServletRequest No configuration found for the specified action: 'login' in namespace: ''. Form action defaulting to 'action' attribute's literal value.
+16-Dec-2025 12:16:27.815 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.startup.HostConfig.undeploy Undeploying context [/ca2]
+16-Dec-2025 12:16:27.861 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ca2] created a ThreadLocal with key of type [com.opensymphony.xwork2.inject.ContainerImpl$10] (value [com.opensymphony.xwork2.inject.ContainerImpl$10@159838f6]) and a value of type [com.opensymphony.xwork2.inject.InternalContext[]] (value [[Lcom.opensymphony.xwork2.inject.InternalContext;@5265fcf3]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+16-Dec-2025 12:16:27.870 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ca2] created a ThreadLocal with key of type [com.opensymphony.xwork2.inject.ContainerImpl$10] (value [com.opensymphony.xwork2.inject.ContainerImpl$10@159838f6]) and a value of type [com.opensymphony.xwork2.inject.InternalContext[]] (value [[Lcom.opensymphony.xwork2.inject.InternalContext;@341a294a]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+16-Dec-2025 12:16:27.871 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ca2] created a ThreadLocal with key of type [com.opensymphony.xwork2.inject.ContainerImpl$10] (value [com.opensymphony.xwork2.inject.ContainerImpl$10@159838f6]) and a value of type [com.opensymphony.xwork2.inject.InternalContext[]] (value [[Lcom.opensymphony.xwork2.inject.InternalContext;@32aafcea]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+16-Dec-2025 12:16:27.871 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ca2] created a ThreadLocal with key of type [com.opensymphony.xwork2.inject.ContainerImpl$10] (value [com.opensymphony.xwork2.inject.ContainerImpl$10@159838f6]) and a value of type [com.opensymphony.xwork2.inject.InternalContext[]] (value [[Lcom.opensymphony.xwork2.inject.InternalContext;@5f38979f]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
