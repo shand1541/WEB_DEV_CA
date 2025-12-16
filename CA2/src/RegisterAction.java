@@ -14,18 +14,18 @@ public class RegisterAction extends ActionSupport {
     private MemberDAO memberDAO;
     
     public RegisterAction() {
-        // Default constructor required by Struts2
+        
     }
     
     public String execute() {
-        // Check if required fields are filled
+        // Check if  fields are filled
         if (username == null || email == null || password == null || 
             username.trim().isEmpty() || email.trim().isEmpty() || password.trim().isEmpty()) {
-            return INPUT; // go back to form
+            return INPUT; // go back 
         }
         
         try {
-            // Initialize DAO here instead of in constructor
+            
             memberDAO = new MemberDAO();
             
             // Check if username already taken

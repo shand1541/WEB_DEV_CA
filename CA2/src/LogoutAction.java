@@ -5,7 +5,7 @@ public class LogoutAction extends ActionSupport {
     
     public String execute() {
         try {
-            // Logout successful - redirect to index
+            // Logout successful 
             return SUCCESS;
             
         } catch (Exception e) {

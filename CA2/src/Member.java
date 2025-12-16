@@ -5,7 +5,7 @@ public class Member {
     
     // User info
     private int memberId;        // unique ID 
-    private String loginName;    // username for login
+    private String loginName;    // username 
     private String emailAddress; // user email
     private String passwordHash; // password
     private String displayName;  // display name
@@ -19,7 +19,7 @@ public class Member {
     // registration date
     private Timestamp registrationDate;
     
-    // Account status: 'active', 'suspended', 'deleted'
+    // Account status: 
     private String accountStatus;
     
     // Default constructor

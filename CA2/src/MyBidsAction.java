@@ -14,7 +14,7 @@ public class MyBidsAction extends ActionSupport {
     
     public String execute() {
         try {
-            // Load available products for bidding
+            // Load products bidding
             ProductDAO productDAO = new ProductDAO();
             availableProducts = productDAO.getAllProducts();
             
@@ -38,8 +38,8 @@ public class MyBidsAction extends ActionSupport {
                 return execute(); // Reload page with error
             }
             
-            // Use demo user for simplified version
-            int userId = 1; // Demo user ID
+           
+            int userId = 1; 
             int productId = Integer.parseInt(selectedProductId);
             BigDecimal bid = new BigDecimal(bidAmount);
             
@@ -114,7 +114,7 @@ public class MyBidsAction extends ActionSupport {
         try {
             Connection conn = DatabaseManager.getConnection();
             
-            // Create bidding_history table if it doesn't exist
+            // Create bidding_history table 
             String createTableSQL = "CREATE TABLE IF NOT EXISTS bidding_history (" +
                                   "bid_id INT AUTO_INCREMENT PRIMARY KEY, " +
                                   "member_id INT NOT NULL, " +

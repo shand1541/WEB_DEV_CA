@@ -12,7 +12,7 @@ public class ViewItemBidsAction extends ActionSupport {
     
     public String execute() {
         try {
-            // Validate productId parameter
+           
             if (productId == null || productId.trim().isEmpty()) {
                 addActionError("Product ID is required to view bids");
                 return ERROR;
@@ -76,7 +76,7 @@ public class ViewItemBidsAction extends ActionSupport {
         }
     }
     
-    // Inner class for bid information
+    //  bid information
     public static class ItemBidInfo {
         private String bidderName;
         private String bidderDisplayName;

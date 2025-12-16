@@ -12,13 +12,13 @@ public class Product {
     private String listingStatus;
     private Timestamp listingDate;
     
-    // Default constructor
+    
     public Product() {
         this.listingStatus = "active";
         this.highestBid = BigDecimal.ZERO;
     }
     
-    // Parameterized constructor
+    
     public Product(String productName, String productDetails, String productCategory, 
                   BigDecimal minimumBid, int ownerId) {
         this.productName = productName;

@@ -29,7 +29,7 @@ public class MemberDAO {
     
     // Check login 
     public Member loginMember(String username, String password) {
-        // Simple login - get user and check password flexibly
+        // Simple login 
         String sql = "SELECT * FROM members WHERE login_name = ?";
         
         try (Connection conn = DatabaseManager.getConnection();

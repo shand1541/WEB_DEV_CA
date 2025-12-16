@@ -8,18 +8,18 @@ public class LoginAction extends ActionSupport {
     private MemberDAO memberDAO;
     
     public LoginAction() {
-        // Default constructor required by Struts2
+        // Default constructor for Struts2
     }
     
     public String execute() {
-        // Check if fields are filled in - first time loading login.jsp
+        // Check if fields are filled in 
         if (username == null || password == null || 
             username.trim().isEmpty() || password.trim().isEmpty()) {
             return INPUT; // go back to login form
         }
         
         try {
-            // Initialize DAO here instead of in constructor
+           
             memberDAO = new MemberDAO();
             
             // Try to login 
