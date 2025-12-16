@@ -1,18 +1,14 @@
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
 import java.sql.*;
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.struts2.interceptor.SessionAware;
 
-@SuppressWarnings("rawtypes")
-public class ViewItemBidsAction extends ActionSupport implements SessionAware {
+public class ViewItemBidsAction extends ActionSupport {
     private static final long serialVersionUID = 1L;
     
     private Product selectedProduct;
     private List<ItemBidInfo> itemBids;
     private String productId;
-    private Map session;
     
     public String execute() {
         try {
@@ -110,9 +106,4 @@ public class ViewItemBidsAction extends ActionSupport implements SessionAware {
     
     public String getProductId() { return productId; }
     public void setProductId(String productId) { this.productId = productId; }
-    
-    @Override
-    public void setSession(Map session) { 
-        this.session = session; 
-    }
 }

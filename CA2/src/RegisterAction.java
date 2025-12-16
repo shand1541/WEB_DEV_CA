@@ -1,7 +1,6 @@
 import java.util.Map;
 import com.opensymphony.xwork2.ActionSupport;
 
-@SuppressWarnings({"all", "unchecked", "rawtypes", "serial"})
 public class RegisterAction extends ActionSupport {
     private static final long serialVersionUID = 1L;
     
@@ -18,7 +17,6 @@ public class RegisterAction extends ActionSupport {
         // Default constructor required by Struts2
     }
     
-    @SuppressWarnings("all")
     public String execute() {
         // Check if required fields are filled
         if (username == null || email == null || password == null || 
@@ -32,6 +30,7 @@ public class RegisterAction extends ActionSupport {
             
             // Check if username already taken
             if (memberDAO.usernameExists(username.trim())) {
+                addActionError("Username already exists. Please choose a different username.");
                 return ERROR; // show error
             }
             
@@ -45,11 +44,17 @@ public class RegisterAction extends ActionSupport {
             member.setPostalAddress(address != null ? address.trim() : null);
             
             if (memberDAO.registerMember(member)) {
+                System.out.println("Registration successful for user: " + username);
                 return SUCCESS;
             } else {
+                addActionError("Registration failed. Please try again.");
+                System.err.println("Registration failed for user: " + username);
                 return ERROR;
             }
         } catch (Exception e) {
+            e.printStackTrace();
+            addActionError("Database connection error. Please try again later.");
+            System.err.println("Registration error for user " + username + ": " + e.getMessage());
             return ERROR;
         }
     }

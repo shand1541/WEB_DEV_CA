@@ -22,7 +22,6 @@
         
         <div class="nav-links">
             <a href="profile.action">My Profile</a>
-            <a href="viewUsers.action">View All Users</a>
             <a href="viewItems.action">View Items</a>
             <a href="addItemForm.action">Add Item</a>
             <a href="myBids.action">My Bids</a>

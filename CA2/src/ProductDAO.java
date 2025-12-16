@@ -30,7 +30,7 @@ public class ProductDAO {
     // Get all items for sale
     public List<Product> getAllProducts() {
         List<Product> products = new ArrayList<>();
-        String sql = "SELECT * FROM products WHERE listing_status = 'available' ORDER BY listing_date DESC";
+        String sql = "SELECT * FROM products WHERE listing_status = 'active' ORDER BY listing_date DESC";
         
         try (Connection conn = DatabaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);

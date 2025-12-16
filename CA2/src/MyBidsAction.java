@@ -1,20 +1,16 @@
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
 import java.math.BigDecimal;
 import java.sql.*;
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.struts2.interceptor.SessionAware;
 
-@SuppressWarnings("rawtypes")
-public class MyBidsAction extends ActionSupport implements SessionAware {
+public class MyBidsAction extends ActionSupport {
     private static final long serialVersionUID = 1L;
     
     private List<Product> availableProducts;
     private List<BidInfo> userBids;
     private String selectedProductId;
     private String bidAmount;
-    private Map session;
     
     public String execute() {
         try {
@@ -42,14 +38,8 @@ public class MyBidsAction extends ActionSupport implements SessionAware {
                 return execute(); // Reload page with error
             }
             
-            // Check if user is logged in
-            if (session == null || session.get("user") == null) {
-                addActionError("You must be logged in to place bids");
-                return execute();
-            }
-            
-            Member user = (Member) session.get("user");
-            int userId = user.getMemberId();
+            // Use demo user for simplified version
+            int userId = 1; // Demo user ID
             int productId = Integer.parseInt(selectedProductId);
             BigDecimal bid = new BigDecimal(bidAmount);
             
@@ -88,11 +78,7 @@ public class MyBidsAction extends ActionSupport implements SessionAware {
     private void loadUserBids() {
         userBids = new ArrayList<BidInfo>();
         
-        String username = "Guest";
-        if (session != null && session.get("user") != null) {
-            Member user = (Member) session.get("user");
-            username = user.getLoginName();
-        }
+        String username = "user"; // Default user
         
         // Get user's bids from database
         try {
@@ -174,9 +160,4 @@ public class MyBidsAction extends ActionSupport implements SessionAware {
     
     public String getBidAmount() { return bidAmount; }
     public void setBidAmount(String bidAmount) { this.bidAmount = bidAmount; }
-    
-    @Override
-    public void setSession(Map session) { 
-        this.session = session; 
-    }
 }

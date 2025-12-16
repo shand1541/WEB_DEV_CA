@@ -1,17 +1,13 @@
 import java.math.BigDecimal;
-import java.util.Map;
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.struts2.interceptor.SessionAware;
 
-@SuppressWarnings("rawtypes")
-public class AddItemAction extends ActionSupport implements SessionAware {
+public class AddItemAction extends ActionSupport {
     private static final long serialVersionUID = 1L;
     
     private String title;
     private String description;
     private String category;
     private String price;
-    private Map session;
     
     public String execute() {
         
@@ -30,11 +26,8 @@ public class AddItemAction extends ActionSupport implements SessionAware {
                 return INPUT;
             }
             
-            // Get user ID from session 
+            // Use default user ID
             int userId = 1;
-            if (session != null && session.get("userId") != null) {
-                userId = (Integer) session.get("userId");
-            }
             
             // Add item to database
             ProductDAO productDAO = new ProductDAO();
@@ -70,9 +63,4 @@ public class AddItemAction extends ActionSupport implements SessionAware {
     
     public String getPrice() { return price; }
     public void setPrice(String price) { this.price = price; }
-    
-    @Override
-    public void setSession(Map session) { 
-        this.session = session; 
-    }
 }

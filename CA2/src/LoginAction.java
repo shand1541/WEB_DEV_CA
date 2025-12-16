@@ -1,15 +1,11 @@
-import java.util.Map;
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.struts2.interceptor.SessionAware;
 
-@SuppressWarnings({"rawtypes", "unchecked"})
-public class LoginAction extends ActionSupport implements SessionAware {
+public class LoginAction extends ActionSupport {
     private static final long serialVersionUID = 1L;
     
     private String username;
     private String password;
     private MemberDAO memberDAO;
-    private Map session;
     
     public LoginAction() {
         // Default constructor required by Struts2
@@ -29,17 +25,19 @@ public class LoginAction extends ActionSupport implements SessionAware {
             // Try to login 
             Member member = memberDAO.loginMember(username.trim(), password);
             if (member != null) {
-                // Login successful 
-                session.put("user", member);
-                session.put("userId", member.getMemberId());
-                session.put("displayName", member.getDisplayName());
+                // Login successful
+                System.out.println("Login successful for user: " + username);
                 return SUCCESS; 
             } else {
                 // Login failed
+                addActionError("Invalid username or password. Please try again.");
+                System.out.println("Login failed for user: " + username);
                 return ERROR; // show error message
             }
         } catch (Exception e) {
             e.printStackTrace();
+            addActionError("Database connection error. Please try again later.");
+            System.err.println("Login error for user " + username + ": " + e.getMessage());
             return ERROR;
         }
     }
@@ -50,9 +48,4 @@ public class LoginAction extends ActionSupport implements SessionAware {
     
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
-    
-    @Override
-    public void setSession(Map session) { 
-        this.session = session; 
-    }
 }

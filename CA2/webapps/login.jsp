@@ -21,14 +21,16 @@
         
         <!-- Display action errors -->
         <s:if test="hasActionErrors()">
-            <div class="error">
+            <div class="error" style="color: red; background: #ffe6e6; padding: 10px; margin: 10px 0; border: 1px solid red;">
+                <strong>Error:</strong><br/>
                 <s:actionerror/>
             </div>
         </s:if>
         
         <!-- Display field errors -->
         <s:if test="hasFieldErrors()">
-            <div class="error">
+            <div class="error" style="color: red; background: #ffe6e6; padding: 10px; margin: 10px 0; border: 1px solid red;">
+                <strong>Field Errors:</strong><br/>
                 <s:fielderror/>
             </div>
         </s:if>

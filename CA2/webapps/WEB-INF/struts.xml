@@ -43,8 +43,9 @@
         </action>
         
         <!-- Dashboard action -->
-        <action name="dashboard">
-            <result>/dashboard.jsp</result>
+        <action name="dashboard" class="DashboardAction">
+            <result name="success">/dashboard.jsp</result>
+            <result name="login" type="redirect">/login.action</result>
         </action>
         
         <!-- Item management actions -->
@@ -80,45 +81,9 @@
         </action>
         
         <!-- User management actions -->
-        <action name="profile">
-            <result>/profile.jsp</result>
-        </action>
-        
-        <action name="viewOtherProfile" class="ViewOtherProfileAction" method="execute">
-            <result name="success">/otherProfile.jsp</result>
-            <result name="error">/error.jsp</result>
-        </action>
-        
-        <action name="viewUsers" class="ViewUsersAction" method="execute">
-            <result name="success">/viewUsers.jsp</result>
-            <result name="error">/error.jsp</result>
-        </action>
-        
-    </package>
-    
-    <!-- Package for secure actions requiring authentication -->
-    <package name="secure" extends="default" namespace="/secure">
-        
-        <!-- Interceptor stack for authentication -->
-        <interceptors>
-            <interceptor name="loginCheck" class="LoginCheckInterceptor"/>
-            <interceptor-stack name="secureStack">
-                <interceptor-ref name="defaultStack"/>
-                <interceptor-ref name="loginCheck"/>
-            </interceptor-stack>
-        </interceptors>
-        
-        <default-interceptor-ref name="secureStack"/>
-        
-        <!-- Secure actions -->
-        <action name="myProfile" class="ProfileAction" method="execute">
+        <action name="profile" class="ProfileAction">
             <result name="success">/profile.jsp</result>
-            <result name="login">/login.jsp</result>
-        </action>
-        
-        <action name="adminPanel" class="AdminAction" method="execute">
-            <result name="success">/admin.jsp</result>
-            <result name="unauthorized">/error.jsp</result>
+            <result name="error">/error.jsp</result>
         </action>
         
     </package>
